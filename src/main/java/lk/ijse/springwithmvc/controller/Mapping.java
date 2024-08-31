@@ -1,0 +1,34 @@
+package lk.ijse.springwithmvc.controller;
+
+
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("map")
+public class Mapping {
+    @GetMapping("hello??")               //postman eke eka letter  ekakata wada type karanna puluwan
+    public String helloMappingPart1() {
+        return "Hello Mapping";
+    }
+
+    @GetMapping("test/**")              //http://localhost:8081/map/test/heloo   path segment ekakata allow weno
+    public String helloMappingPart2() {   //http://localhost:8081/map/test/heloo/helooo/hi  path segmanet dekakata wada allowe weno
+        return "Hello Mapping with *";    //wildcart mapping walata samanai
+    }
+
+
+    @PostMapping("/{name}/{value}")
+    public String helloMappingPart3(@PathVariable ("name") String name, @PathVariable("value") int value) {
+        return "PathVariable are " + name +"and " + value;  //http://localhost:8081/map/Dinali /50
+    }
+
+
+    @PostMapping("/{id:S\\d{4}}")
+    public String helloMappingPart4(@PathVariable("id") String id){  //http://localhost:8081/map/S0001
+        return "Patters accept path variable is " + id ;
+    }
+
+
+
+
+}
