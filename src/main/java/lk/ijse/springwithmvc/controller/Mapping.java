@@ -1,5 +1,6 @@
 package lk.ijse.springwithmvc.controller;
 
+import org.springframework.http.MediaType;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -28,15 +29,21 @@ public class Mapping {
         return "Patters accept path variable is " + id;
     }
 
-    @PostMapping(params = {"name","age"})   //http://localhost:8081/map?
-    public String helloMappingPart5(@RequestParam("name") String myName,@RequestParam ("age")int myAge){
-    return "Path variables are " + myName + " and "+ myAge;
+    @PostMapping(params = {"name", "age"})   //http://localhost:8081/map?
+    public String helloMappingPart5(@RequestParam("name") String myName, @RequestParam("age") int myAge) {
+        return "Path variables are " + myName + " and " + myAge;
     }
 
-    @PostMapping(headers = "X-city")
-    public String helloMappingPart6(@RequestHeader("X-city") String myCustomHeader){ //http://localhost:8081/map
-        return "My City is "+ myCustomHeader;
 
+    @PostMapping(headers = {"X-city", "Content-Type"})    // custom headers
+    public String helloMappingPart6(@RequestHeader("X-city") String myCustomHeader, @RequestHeader("Content-Type") String myContentTypeHeader) { //http://localhost:8081/map
+        return "My City is " + myCustomHeader + " and  My Content-Type Header is " + myContentTypeHeader;
+
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String helloMappingPart7() {
+        return "JSON mine type Handle";
     }
 
 }
