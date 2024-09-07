@@ -18,17 +18,25 @@ public class Mapping {
 
 
     @PostMapping("/{name}/{value}")
-    public String helloMappingPart3(@PathVariable ("name") String name, @PathVariable("value") int value) {
-        return "PathVariable are " + name +"and " + value;  //http://localhost:8081/map/Dinali /50
+    public String helloMappingPart3(@PathVariable("name") String name, @PathVariable("value") int value) {
+        return "PathVariable are " + name + "and " + value;  //http://localhost:8081/map/Dinali /50
     }
 
 
     @PostMapping("/{id:S\\d{4}}")
-    public String helloMappingPart4(@PathVariable("id") String id){  //http://localhost:8081/map/S0001
-        return "Patters accept path variable is " + id ;
+    public String helloMappingPart4(@PathVariable("id") String id) {  //http://localhost:8081/map/S0001
+        return "Patters accept path variable is " + id;
     }
 
+    @PostMapping(params = {"name","age"})   //http://localhost:8081/map?
+    public String helloMappingPart5(@RequestParam("name") String myName,@RequestParam ("age")int myAge){
+    return "Path variables are " + myName + " and "+ myAge;
+    }
 
+    @PostMapping(headers = "X-city")
+    public String helloMappingPart6(@RequestHeader("X-city") String myCustomHeader){ //http://localhost:8081/map
+        return "My City is "+ myCustomHeader;
 
+    }
 
 }
